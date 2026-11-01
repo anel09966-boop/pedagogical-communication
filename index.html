@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedagogical Communication — Academic Presentation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#07182c;
+  --blue:#123c64;
+  --steel:#244f73;
+  --cyan:#7bc9db;
+  --gold:#d9bd82;
+  --text:#f3f5f8;
+  --muted:#c7d2dc;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--navy);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
+  overflow:hidden;
+}
+
+.slide{
+  display:none;
+  width:100vw;
+  height:100vh;
+  padding:5vh 6vw 12vh;
+  overflow-y:auto;
+  position:relative;
+  background:
+    radial-gradient(circle at 85% 15%,#32618a55,transparent 35%),
+    linear-gradient(130deg,#081a30,#153d61 65%,#102a45);
+}
+
+.slide.active{
+  display:flex;
+  flex-direction:column;
+  animation:fadeIn .65s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1,h2{
+  font-family:"Playfair Display",serif;
+  font-weight:600;
+}
+
+h1{
+  font-size:clamp(54px,6vw,104px);
+  line-height:1.1;
+  margin:20px 0;
+}
+
+h2{
+  font-size:clamp(45px,4.6vw,78px);
+  line-height:1.12;
+  margin:12px 0 30px;
+}
+
+h3{
+  font-size:clamp(28px,2.4vw,42px);
+  margin:0 0 15px;
+  color:var(--gold);
+}
+
+p,li{
+  font-size:clamp(24px,2.1vw,36px);
+  line-height:1.45;
+}
+
+li{margin-bottom:12px}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:19px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+
+.muted{color:var(--muted)}
+.accent{color:var(--cyan)}
+.gold{color:var(--gold)}
+
+.rule{
+  height:2px;
+  width:95px;
+  background:var(--gold);
+  margin:20px 0 28px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:stretch;
+}
+
+.grid.three{grid-template-columns:repeat(3,1fr)}
+
+.panel{
+  background:linear-gradient(135deg,#ffffff13,#ffffff05);
+  border:1px solid #ffffff25;
+  padding:30px;
+  border-radius:4px;
+  backdrop-filter:blur(10px);
+}
+
+.panel p,.panel li{
+  font-size:clamp(22px,1.85vw,32px);
+}
+
+.photo{
+  width:100%;
+  height:100%;
+  min-height:350px;
+  object-fit:cover;
+  filter:saturate(.65) contrast(1.08);
+  border:1px solid #ffffff30;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:50px;
+  align-items:center;
+  flex:1;
+}
+
+button{
+  border:1px solid #d9bd8288;
+  background:#ffffff12;
+  color:white;
+  font-family:inherit;
+  font-size:21px;
+  padding:14px 23px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+button:hover{
+  background:#d9bd8230;
+  border-color:var(--gold);
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  z-index:100;
+  background:#061525f2;
+  border-top:1px solid #ffffff25;
+  padding:12px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.nav button{font-size:18px;padding:10px 17px}
+
+.progress{
+  position:fixed;
+  bottom:68px;
+  left:0;
+  height:3px;
+  background:var(--gold);
+  z-index:101;
+  transition:width .4s;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:#061525f5;
+  padding:7vh 10vw;
+  overflow-y:auto;
+}
+
+.modal.open{display:block}
+
+.modal-box{
+  max-width:1200px;
+  margin:auto;
+  background:#123454;
+  border:1px solid #ffffff30;
+  padding:45px;
+}
+
+.stat{
+  font-family:"Playfair Display",serif;
+  font-size:72px;
+  color:var(--gold);
+}
+
+.line-item{
+  border-left:3px solid var(--gold);
+  padding-left:25px;
+  margin:22px 0;
+}
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  margin-top:35px;
+}
+
+.time{
+  border-top:3px solid var(--gold);
+  padding:22px;
+  background:#ffffff10;
+  cursor:pointer;
+}
+
+.time strong{
+  font-size:38px;
+  color:var(--gold);
+}
+
+.pyramid{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.level{
+  background:linear-gradient(90deg,#315b79,#557b94);
+  border:1px solid #ffffff55;
+  padding:15px;
+  text-align:center;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.level:hover{background:#93784b}
+
+.response{
+  color:var(--gold);
+  min-height:75px;
+  margin-top:25px;
+}
+
+.quote{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(38px,4.1vw,72px);
+  line-height:1.25;
+}
+
+@media(max-width:900px){
+  .grid,.grid.three,.split,.timeline{
+    grid-template-columns:1fr;
+  }
+  .slide{padding:35px 25px 110px}
+  .photo{max-height:300px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SLIDE 1 -->
+<section class="slide active">
+  <div class="eyebrow">University / Pedagogy Acmeology</div>
+  <div class="split">
+    <div>
+      <div class="rule"></div>
+      <h1>Pedagogical<br>Communication<br><span class="accent">as an Acmeological Issue</span></h1>
+      <p class="gold">The Science of Human Connection</p>
+      <p class="muted">
+        Prepared by:<br>
+        Zholbarysbek Anel<br>
+        Arystanbek Akerke<br>
+        Nauryzbai Akpeil
+      </p>
+      <p>Group: KA 25–20</p>
+    </div>
+    <img class="photo"
+      src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200"
+      alt="University">
+  </div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide">
+  <div class="eyebrow">01 / Theoretical Foundations</div>
+  <h2>Key Concepts</h2>
+  <div class="rule"></div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Pedagogical Communication</h3>
+      <p>Professional interaction between teachers and students that supports learning, dialogue and interpersonal development.</p>
+      <ul>
+        <li>Exchange of knowledge</li>
+        <li>Active listening</li>
+        <li>Constructive feedback</li>
+        <li>Mutual understanding</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Acmeology</h3>
+      <p>The interdisciplinary study of personal and professional development, with particular attention to achieving high levels of competence and mastery.</p>
+      <p class="gold">Central principle: continuous professional growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide">
+  <div class="eyebrow">02 / Educational Significance</div>
+  <h2>The Functions of Communication</h2>
+  <div class="rule"></div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>01 — Educational</h3>
+      <p>Supports the acquisition and understanding of knowledge.</p>
+    </div>
+    <div class="panel">
+      <h3>02 — Motivational</h3>
+      <p>Encourages engagement, curiosity and active participation.</p>
+    </div>
+    <div class="panel">
+      <h3>03 — Developmental</h3>
+      <p>Strengthens critical thinking, creativity and independence.</p>
+    </div>
+    <div class="panel">
+      <h3>04 — Relational</h3>
+      <p>Establishes trust, cooperation and mutual respect.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide">
+  <div class="eyebrow">03 / Humanistic Educational Thought</div>
+  <h2>Haim Ginott: The Ethics of Communication</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Haim Ginott (1922–1973)</h3>
+      <p>Psychologist and educator.</p>
+      <p><i>Teacher and Child</i> (1972)</p>
+      <ul>
+        <li>Respect the student's dignity.</li>
+        <li>Avoid personal humiliation.</li>
+        <li>Address behavior, not identity.</li>
+        <li>Maintain a supportive classroom climate.</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Communication Reframing</h3>
+      <p id="ginott">“You are a bad student.”</p>
+      <button onclick="reframe()">REFRAME STATEMENT</button>
+      <p class="gold">Preserve dignity while addressing behavior.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide">
+  <div class="eyebrow">04 / Comparative Analysis</div>
+  <h2>Pedagogical Communication Styles</h2>
+
+  <div class="grid three">
+    <div class="panel">
+      <h3>Authoritarian</h3>
+      <p>Teacher-centered decisions, strong control and emphasis on discipline.</p>
+      <button onclick="info('Authoritarian Style','A highly directive approach can establish structure, but excessive control may limit student autonomy and dialogue.')">ANALYZE</button>
+    </div>
+
+    <div class="panel">
+      <h3>Democratic</h3>
+      <p>Cooperation, shared responsibility and meaningful participation.</p>
+      <button onclick="info('Democratic Style','A participatory approach combines clear expectations with respect, dialogue and student involvement.')">ANALYZE</button>
+    </div>
+
+    <div class="panel">
+      <h3>Liberal</h3>
+      <p>Considerable learner freedom with limited teacher intervention.</p>
+      <button onclick="info('Liberal Style','Autonomy may support initiative, but insufficient guidance can create uncertainty and uneven engagement.')">ANALYZE</button>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide">
+  <div class="eyebrow">05 / Psychological Foundations</div>
+  <h2>Psychological Competence</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Empathy</h3>
+      <p>Understanding students' emotions and perspectives.</p>
+    </div>
+    <div class="panel">
+      <h3>Active Listening</h3>
+      <p>Giving thoughtful attention to students' concerns.</p>
+    </div>
+    <div class="panel">
+      <h3>Emotional Intelligence</h3>
+      <p>Recognizing and regulating emotions constructively.</p>
+    </div>
+    <div class="panel">
+      <h3>Tolerance</h3>
+      <p>Respecting individual differences and diverse experiences.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide">
+  <div class="eyebrow">06 / Person-Centered Approach</div>
+  <h2>Carl Rogers: Empathy and Acceptance</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Carl Rogers (1902–1987)</h3>
+      <p>American psychologist and influential theorist of humanistic psychology.</p>
+      <p><i>Freedom to Learn</i> (1969)</p>
+    </div>
+
+    <div class="panel">
+      <h3>Three Core Conditions</h3>
+      <ul>
+        <li>Empathy</li>
+        <li>Genuineness</li>
+        <li>Unconditional positive regard</li>
+      </ul>
+      <p class="gold">Learning is supported by an atmosphere of acceptance and understanding.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide">
+  <div class="eyebrow">07 / Applied Pedagogical Analysis</div>
+  <h2>Classroom Conflict: A Case Study</h2>
+
+  <div class="panel">
+    <h3>Scenario</h3>
+    <p>A student refuses to participate in a collaborative classroom activity.</p>
+    <p>Which response best supports constructive communication?</p>
+
+    <div class="grid three">
+      <button onclick="caseAnswer(1)">Public criticism</button>
+      <button onclick="caseAnswer(2)">Private dialogue</button>
+      <button onclick="caseAnswer(3)">No intervention</button>
+    </div>
+
+    <p class="response" id="caseResult"></p>
+  </div>
+
+  <p class="gold">Conflict resolution: Listen → Clarify → Collaborate → Reflect.</p>
+</section>
+
+<!-- SLIDE 9 -->
+<section class="slide">
+  <div class="eyebrow">08 / Acmeological Perspective</div>
+  <h2>The Architecture of Professional Excellence</h2>
+
+  <div class="grid three">
+    <div class="panel">
+      <h3>Communication</h3>
+      <p>Meaningful professional dialogue.</p>
+    </div>
+    <div class="panel">
+      <h3>Reflection</h3>
+      <p>Critical evaluation of practice.</p>
+    </div>
+    <div class="panel">
+      <h3>Competence</h3>
+      <p>Pedagogical knowledge and skill.</p>
+    </div>
+    <div class="panel">
+      <h3>Creativity</h3>
+      <p>Innovation and adaptability.</p>
+    </div>
+    <div class="panel">
+      <h3>Self-Regulation</h3>
+      <p>Constructive emotional management.</p>
+    </div>
+    <div class="panel">
+      <h3>Growth</h3>
+      <p>Commitment to lifelong learning.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 10 -->
+<section class="slide">
+  <div class="eyebrow">09 / Motivation and Human Development</div>
+  <h2>Abraham Maslow: Self-Actualization</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Abraham Maslow (1908–1970)</h3>
+      <p>Humanistic psychologist known for his theory of human motivation.</p>
+      <p><i>Motivation and Personality</i> (1954)</p>
+      <p class="gold">Self-actualization: developing one's capacities and potential.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Conceptual Model of Needs</h3>
+      <div class="pyramid">
+        <div class="level" style="width:52%" onclick="need('Self-actualization')">Self-actualization</div>
+        <div class="level" style="width:63%" onclick="need('Esteem')">Esteem</div>
+        <div class="level" style="width:74%" onclick="need('Belonging')">Belonging</div>
+        <div class="level" style="width:85%" onclick="need('Safety')">Safety</div>
+        <div class="level" style="width:96%" onclick="need('Physiological')">Physiological</div>
+      </div>
+      <p class="response" id="needText">Select a level for an explanation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 11 -->
+<section class="slide">
+  <div class="eyebrow">10 / Professional Development</div>
+  <h2>Developing Communication Excellence</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Professional Strategies</h3>
+      <ol>
+        <li>Continuous learning</li>
+        <li>Critical self-reflection</li>
+        <li>Constructive feedback</li>
+        <li>Educational technologies</li>
+        <li>Emotional self-regulation</li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <h3>Core Competencies</h3>
+      <ul>
+        <li>Professional knowledge</li>
+        <li>Communicative competence</li>
+        <li>Creativity and flexibility</li>
+        <li>Ethical responsibility</li>
+        <li>Commitment to development</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 12 -->
+<section class="slide">
+  <div class="eyebrow">11 / Conclusion</div>
+  <h2>The Science of Human Connection</h2>
+  <div class="rule"></div>
+
+  <div class="grid three">
+    <div class="panel">
+      <h3>GINOTT</h3>
+      <p>Respect</p>
+    </div>
+    <div class="panel">
+      <h3>ROGERS</h3>
+      <p>Empathy</p>
+    </div>
+    <div class="panel">
+      <h3>MASLOW</h3>
+      <p>Growth</p>
+    </div>
+  </div>
+
+  <p class="quote">
+    Great teachers do more than transmit knowledge.<br>
+    <span class="gold">They help human potential develop.</span>
+  </p>
+
+  <h2>Thank You for Your Attention</h2>
+  <button onclick="openResearch()">ACADEMIC REFERENCES</button>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="infoModal">
+  <div class="modal-box">
+    <button onclick="closeInfo()">CLOSE ×</button>
+    <h2 id="infoTitle"></h2>
+    <p id="infoBody"></p>
+  </div>
+</div>
+
+<!-- REFERENCES -->
+<div class="modal" id="researchModal">
+  <div class="modal-box">
+    <button onclick="closeResearch()">CLOSE ×</button>
+    <h2>Academic References</h2>
+    <ol>
+      <li>Ginott, H. G. (1972). <i>Teacher and Child.</i></li>
+      <li>Rogers, C. R. (1969). <i>Freedom to Learn.</i></li>
+      <li>Maslow, A. H. (1954). <i>Motivation and Personality.</i></li>
+      <li>Maslow, A. H. (1943). <i>A Theory of Human Motivation.</i></li>
+    </ol>
+
+    <h3>Research Portal</h3>
+    <img width="190" height="190"
+      alt="QR code to academic search"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data=https%3A%2F%2Fscholar.google.com%2Fscholar%3Fq%3Dpedagogical%2Bcommunication">
+    <p>Scan to explore academic research.</p>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="progress" id="progress"></div>
+
+<div class="nav">
+  <div>
+    <button onclick="previousSlide()">← PREVIOUS</button>
+    <button onclick="nextSlide()">NEXT →</button>
+  </div>
+  <span id="counter">01 / 12</span>
+  <div>
+    <button onclick="openResearch()">REFERENCES</button>
+    <button onclick="fullscreen()">FULLSCREEN</button>
+  </div>
+</div>
+
+<script>
+const slides=document.querySelectorAll(".slide");
+let current=0;
+
+function showSlide(n){
+  if(n<0||n>=slides.length)return;
+  slides[current].classList.remove("active");
+  current=n;
+  slides[current].classList.add("active");
+  document.getElementById("counter").textContent=
+    String(current+1).padStart(2,"0")+" / "+slides.length;
+  document.getElementById("progress").style.width=
+    ((current+1)/slides.length*100)+"%";
+}
+
+function nextSlide(){showSlide(current+1)}
+function previousSlide(){showSlide(current-1)}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    closeInfo();
+    closeResearch();
+    return;
+  }
+  if(document.querySelector(".modal.open"))return;
+  if(e.key==="ArrowRight"){nextSlide()}
+  if(e.key==="ArrowLeft"){previousSlide()}
+});
+
+function fullscreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen();
+  }else{
+    document.exitFullscreen();
+  }
+}
+
+function reframe(){
+  document.getElementById("ginott").textContent=
+    "Your behavior interrupted the lesson. Let us discuss how to improve the situation.";
+}
+
+function info(title,body){
+  document.getElementById("infoTitle").textContent=title;
+  document.getElementById("infoBody").textContent=body;
+  document.getElementById("infoModal").classList.add("open");
+}
+
+function closeInfo(){
+  document.getElementById("infoModal").classList.remove("open");
+}
+
+function caseAnswer(n){
+  const result=document.getElementById("caseResult");
+  if(n===2){
+    result.textContent="Recommended: listen privately, identify the concern and agree on constructive next steps.";
+  }else if(n===1){
+    result.textContent="Public criticism risks damaging trust and student dignity.";
+  }else{
+    result.textContent="Avoiding the issue may leave the underlying conflict unresolved.";
+  }
+}
+
+function need(level){
+  const data={
+    "Self-actualization":"Developing abilities and realizing personal potential.",
+    "Esteem":"Experiencing competence, recognition and achievement.",
+    "Belonging":"Feeling accepted and connected to others.",
+    "Safety":"Experiencing security and stability.",
+    "Physiological":"Meeting fundamental physical needs."
+  };
+  document.getElementById("needText").textContent=level+": "+data[level];
+}
+
+function openResearch(){
+  document.getElementById("researchModal").classList.add("open");
+}
+
+function closeResearch(){
+  document.getElementById("researchModal").classList.remove("open");
+}
+
+showSlide(0);
+</script>
+
+</body>
+</html>
+<!-- ==================================================
+     ACADEMIC VISUAL UPGRADE
+     Insert immediately BEFORE </body>
+================================================== -->
+
+<style>
+/* Premium visual refinements */
+.slide {
+  isolation: isolate;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  right: -12vw;
+  top: -18vw;
+  width: 38vw;
+  height: 38vw;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(111, 177, 220, .13),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.academic-icon {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  color: #d9bd82;
+  margin-bottom: 14px;
+}
+
+.academic-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.panel:hover {
+  transform: translateY(-5px);
+  border-color: rgba(217, 189, 130, .55);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.05)
+  );
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 65px;
+  height: 2px;
+  background: #d9bd82;
+}
+
+.academic-hero {
+  position: relative;
+  min-height: 440px;
+  height: min(64vh, 650px);
+  overflow: hidden;
+  border: 1px solid rgba(217,189,130,.45);
+  background: linear-gradient(145deg,#173e62,#081b30);
+}
+
+.academic-hero svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px 28px;
+  background: linear-gradient(transparent,#07182cee);
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #e8d5ad;
+  text-transform: uppercase;
+}
+
+.scientist-profile {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 20px;
+  margin: 15px 0 25px;
+  background: rgba(255,255,255,.06);
+  border-left: 3px solid #d9bd82;
+}
+
+.scientist-profile img {
+  width: 132px;
+  height: 152px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  border: 1px solid #d9bd82;
+}
+
+.scientist-placeholder {
+  width: 132px;
+  height: 152px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background: #254866;
+  color: #e8d5ad;
+  font-family: Georgia,serif;
+  font-size: 48px;
+  border: 1px solid #d9bd82;
+}
+
+.scientist-profile strong {
+  display: block;
+  font-family: Georgia,serif;
+  font-size: clamp(25px,2.2vw,36px);
+  color: #f3f5f8;
+}
+
+.scientist-profile span {
+  display: block;
+  margin-top: 9px;
+  font-size: 22px;
+  color: #d9bd82;
+}
+
+.visual-divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 22px 0;
+  color: #d9bd82;
+  font-size: 17px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.visual-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(217,189,130,.45);
+}
+
+.slide.active .panel,
+.slide.active .scientist-profile {
+  animation: academicReveal .65s ease both;
+}
+
+.slide.active .panel:nth-child(2) {
+  animation-delay: .12s;
+}
+
+.slide.active .panel:nth-child(3) {
+  animation-delay: .2s;
+}
+
+@keyframes academicReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.active .panel,
+  .slide.active .scientist-profile {
+    animation: none;
+  }
+}
+
+@media(max-width:900px) {
+  .academic-hero {
+    min-height: 250px;
+    height: 310px;
+  }
+
+  .scientist-profile img,
+  .scientist-placeholder {
+    width: 95px;
+    height: 115px;
+  }
+}
+</style>
+
+<script>
+(function () {
+
+  /* -------------------------------------------
+     1. UNIVERSITY IMAGE
+     A built-in illustration that always works.
+  ------------------------------------------- */
+
+  const universityArt = `
+    <div class="academic-hero">
+      <svg viewBox="0 0 900 800"
+           xmlns="http://www.w3.org/2000/svg"
+           role="img"
+           aria-label="Architectural illustration of a university">
+
+        <defs>
+          <linearGradient id="skyAcademic" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#396c96"/>
+            <stop offset=".55" stop-color="#163a5d"/>
+            <stop offset="1" stop-color="#07182c"/>
+          </linearGradient>
+
+          <linearGradient id="buildingAcademic" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#d5c5a7"/>
+            <stop offset="1" stop-color="#8294a3"/>
+          </linearGradient>
+
+          <pattern id="windowsAcademic"
+                   width="90" height="110"
+                   patternUnits="userSpaceOnUse">
+            <rect x="26" y="18" width="38" height="64"
+                  fill="#163a59" stroke="#d6c49f"
+                  stroke-width="4"/>
+            <path d="M45 18V82" stroke="#d6c49f" stroke-width="3"/>
+          </pattern>
+        </defs>
+
+        <rect width="900" height="800" fill="url(#skyAcademic)"/>
+
+        <circle cx="700" cy="145" r="160"
+                fill="#b5d5e5" opacity=".09"/>
+
+        <g stroke="#d9bd82" stroke-width="1" opacity=".22">
+          <path d="M0 110H900"/>
+          <path d="M0 240H900"/>
+          <path d="M0 370H900"/>
+          <path d="M100 0V800"/>
+          <path d="M450 0V800"/>
+          <path d="M800 0V800"/>
+        </g>
+
+        <!-- Ground -->
+        <rect y="675" width="900" height="125" fill="#10283e"/>
+        <path d="M0 675H900" stroke="#d9bd82" stroke-width="5"/>
+
+        <!-- University facade -->
+        <rect x="100" y="335" width="700" height="340"
+              fill="url(#buildingAcademic)"/>
+
+        <rect x="112" y="350" width="676" height="300"
+              fill="url(#windowsAcademic)" opacity=".8"/>
+
+        <!-- Classical roof -->
+        <path d="M65 325L450 135L835 325Z"
+              fill="#b7aa94"
+              stroke="#ead7ae"
+              stroke-width="7"/>
+
+        <path d="M180 302L450 172L720 302Z"
+              fill="#1d496c"
+              stroke="#d9bd82"
+              stroke-width="4"/>
+
+        <circle cx="450" cy="245" r="43"
+                fill="none"
+                stroke="#d9bd82"
+                stroke-width="5"/>
+
+        <path d="M425 245L445 265L480 220"
+              fill="none"
+              stroke="#d9bd82"
+              stroke-width="6"/>
+
+        <!-- Columns -->
+        <g fill="#d3c5ac" stroke="#8b9aa3" stroke-width="3">
+          <rect x="160" y="350" width="50" height="300"/>
+          <rect x="270" y="350" width="50" height="300"/>
+          <rect x="380" y="350" width="50" height="300"/>
+          <rect x="490" y="350" width="50" height="300"/>
+          <rect x="600" y="350" width="50" height="300"/>
+          <rect x="710" y="350" width="50" height="300"/>
+        </g>
+
+        <!-- Entrance -->
+        <rect x="400" y="525" width="100" height="150"
+              fill="#0a2035"
+              stroke="#d9bd82"
+              stroke-width="5"/>
+
+        <path d="M450 525V675" stroke="#d9bd82" stroke-width="3"/>
+
+        <!-- Steps -->
+        <rect x="355" y="675" width="190" height="15" fill="#c5b8a3"/>
+        <rect x="325" y="690" width="250" height="15" fill="#a6a9a5"/>
+        <rect x="295" y="705" width="310" height="17" fill="#8398a5"/>
+
+        <!-- Academic caption -->
+        <text x="450" y="90"
+              text-anchor="middle"
+              font-family="Georgia,serif"
+              font-size="37"
+              letter-spacing="8"
+              fill="#f2e5c8">
+          ACADEMIC EXCELLENCE
+        </text>
+      </svg>
+
+      <div class="hero-label">
+        Knowledge · Research · Professional Growth
+      </div>
+    </div>
+  `;
+
+  const firstSlide = document.querySelectorAll(".slide")[0];
+
+  if (firstSlide) {
+    const oldImage = firstSlide.querySelector("img.photo");
+
+    if (oldImage) {
+      oldImage.insertAdjacentHTML("afterend", universityArt);
+      oldImage.remove();
+    }
+  }
+
+
+  /* -------------------------------------------
+     2. PROFESSIONAL SVG ICON LIBRARY
+  ------------------------------------------- */
+
+  const icons = {
+
+    book: `
+      <path d="M3 5.5C6 4 9 4 12 6v14c-3-2-6-2-9-.5z"/>
+      <path d="M21 5.5c-3-1.5-6-1.5-9 .5v14c3-2 6-2 9-.5z"/>
+    `,
+
+    communication: `
+      <path d="M4 5h16v11H9l-5 4z"/>
+      <path d="M8 9h8M8 12h5"/>
+    `,
+
+    growth: `
+      <path d="M4 19l6-6 4 3 6-9"/>
+      <path d="M15 7h5v5"/>
+    `,
+
+    empathy: `
+      <path d="M20.8 9c0 5-8.8 11-8.8 11S3.2 14 3.2 9a5 5 0 0 1 8.8-3.2A5 5 0 0 1 20.8 9z"/>
+    `,
+
+    psychology: `
+      <path d="M12 21V9"/>
+      <path d="M12 10C8 3 2 6 4 12c-3 4 1 8 6 7"/>
+      <path d="M12 10c4-7 10-4 8 2 3 4-1 8-6 7"/>
+    `,
+
+    reflection: `
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 6v6l4 3"/>
+    `,
+
+    excellence: `
+      <path d="M12 2l3 7h7l-5.5 5 2 8-6.5-4-6.5 4 2-8L2 9h7z"/>
+    `,
+
+    cooperation: `
+      <circle cx="8" cy="7" r="3"/>
+      <circle cx="17" cy="7" r="3"/>
+      <path d="M2 20v-3a6 6 0 0 1 12 0v3"/>
+      <path d="M14 13a6 6 0 0 1 8 6v1"/>
+    `,
+
+    balance: `
+      <path d="M12 3v18M4 7h16M7 7l-4 7h8zM17 7l-4 7h8z"/>
+    `,
+
+    innovation: `
+      <path d="M9 18h6M10 21h4"/>
+      <path d="M8 15c-6-7 1-14 7-11 6 3 4 9 1 11l-1 2H9z"/>
+    `
+  };
+
+  function icon(name) {
+    return `
+      <div class="academic-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          ${icons[name] || icons.book}
+        </svg>
+      </div>
+    `;
+  }
+
+  const iconOrder = [
+    "book",
+    "communication",
+    "growth",
+    "empathy",
+    "psychology",
+    "reflection",
+    "excellence",
+    "cooperation",
+    "balance",
+    "innovation"
+  ];
+
+  document.querySelectorAll(".panel").forEach((panel, index) => {
+    const heading = panel.querySelector("h3");
+
+    if (heading) {
+      heading.insertAdjacentHTML(
+        "beforebegin",
+        icon(iconOrder[index % iconOrder.length])
+      );
+    }
+  });
+
+
+  /* -------------------------------------------
+     3. SCIENTIST PORTRAITS
+     Remote portraits with graceful fallback.
+  ------------------------------------------- */
+
+  const scientists = [
+    {
+      slide: 3,
+      name: "Haim Ginott",
+      years: "1922–1973",
+      initials: "HG",
+      image:
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Haim_Ginott.jpg"
+    },
+    {
+      slide: 6,
+      name: "Carl Rogers",
+      years: "1902–1987",
+      initials: "CR",
+      image:
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Carl_Rogers.jpg"
+    },
+    {
+      slide: 9,
+      name: "Abraham Maslow",
+      years: "1908–1970",
+      initials: "AM",
+      image:
+        "https://commons.wikimedia.org/wiki/Special:FilePath/Abraham_Maslow.jpg"
+    }
+  ];
+
+  const slides = document.querySelectorAll(".slide");
+
+  scientists.forEach(person => {
+    const slide = slides[person.slide];
+    if (!slide) return;
+
+    const panel = slide.querySelector(".panel");
+    if (!panel) return;
+
+    const profile = document.createElement("div");
+    profile.className = "scientist-profile";
+
+    profile.innerHTML = `
+      <img
+        src="${person.image}"
+        alt="Portrait of ${person.name}"
+        loading="lazy"
+      >
+
+      <div class="scientist-placeholder">
+        ${person.initials}
+      </div>
+
+      <div>
+        <strong>${person.name}</strong>
+        <span>${person.years}</span>
+        <span>Scientific Perspective</span>
+      </div>
+    `;
+
+    const image = profile.querySelector("img");
+    const fallback = profile.querySelector(".scientist-placeholder");
+
+    image.addEventListener("error", () => {
+      image.style.display = "none";
+      fallback.style.display = "flex";
+    });
+
+    panel.prepend(profile);
+  });
+
+
+  /* -------------------------------------------
+     4. ACADEMIC SECTION LABELS
+  ------------------------------------------- */
+
+  const labels = {
+    1: "CONCEPTUAL FRAMEWORK",
+    2: "EDUCATIONAL FUNCTIONS",
+    3: "HUMANISTIC PEDAGOGY",
+    4: "COMPARATIVE PERSPECTIVE",
+    5: "PSYCHOLOGICAL COMPETENCE",
+    6: "PERSON-CENTERED EDUCATION",
+    7: "APPLIED CASE ANALYSIS",
+    8: "PROFESSIONAL EXCELLENCE",
+    9: "HUMAN MOTIVATION",
+    10: "DEVELOPMENT STRATEGIES",
+    11: "SCIENTIFIC SYNTHESIS"
+  };
+
+  slides.forEach((slide, index) => {
+    if (!labels[index]) return;
+
+    const heading = slide.querySelector("h2");
+    if (!heading) return;
+
+    const divider = document.createElement("div");
+    divider.className = "visual-divider";
+    divider.textContent = labels[index];
+
+    heading.insertAdjacentElement("afterend", divider);
+  });
+
+})();
+</script><style>
+/* ACADEMIC INTERACTIVE EXTENSIONS */
+
+.academic-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.timeline-point {
+  background: rgba(255,255,255,.08);
+  border-top: 3px solid #d9bd82;
+  padding: 20px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.timeline-point:hover {
+  background: rgba(217,189,130,.18);
+  transform: translateY(-5px);
+}
+
+.timeline-point strong {
+  display: block;
+  color: #d9bd82;
+  font-size: 35px;
+}
+
+.timeline-point span {
+  display: block;
+  font-size: 21px;
+  margin-top: 10px;
+}
+
+.academic-reveal {
+  border-left: 3px solid #d9bd82;
+  padding: 15px 25px;
+  background: rgba(255,255,255,.07);
+  font-size: 25px;
+  margin-top: 20px;
+}
+
+.comparison-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.comparison-box {
+  padding: 25px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+.comparison-box h4 {
+  font-size: 26px;
+  color: #d9bd82;
+  margin: 0 0 12px;
+}
+
+.comparison-box p {
+  font-size: 25px;
+}
+
+.excellence-framework {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.excellence-node {
+  padding: 20px 12px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid #d9bd8266;
+  text-align: center;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.excellence-node:hover {
+  background: rgba(217,189,130,.18);
+}
+
+.reflection-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.reflection-options button {
+  flex: 1;
+  min-width: 180px;
+}
+
+.slide-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,18,33,.97);
+  z-index: 300;
+  padding: 6vh 8vw;
+  overflow-y: auto;
+}
+
+.slide-menu.open {
+  display: block;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.menu-item {
+  text-align: left;
+  padding: 22px;
+  font-size: 22px;
+  border: 1px solid #d9bd8266;
+}
+
+@media(max-width:900px) {
+  .academic-timeline,
+  .comparison-stage,
+  .excellence-framework,
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+(function(){
+
+  const slides = document.querySelectorAll(".slide");
+
+  /* 1. SCIENTIFIC TIMELINE */
+  const timelineSlide = slides[9];
+
+  if(timelineSlide){
+    const timeline = document.createElement("div");
+    timeline.innerHTML = `
+      <div class="academic-timeline">
+        <div class="timeline-point" data-year="1943">
+          <strong>1943</strong>
+          <span>Maslow — Human Motivation</span>
+        </div>
+        <div class="timeline-point" data-year="1954">
+          <strong>1954</strong>
+          <span>Motivation and Personality</span>
+        </div>
+        <div class="timeline-point" data-year="1969">
+          <strong>1969</strong>
+          <span>Rogers — Freedom to Learn</span>
+        </div>
+        <div class="timeline-point" data-year="1972">
+          <strong>1972</strong>
+          <span>Ginott — Teacher and Child</span>
+        </div>
+      </div>
+      <div class="academic-reveal" id="timelineExplanation">
+        Select a year to explore its scientific significance.
+      </div>
+    `;
+
+    timelineSlide.appendChild(timeline);
+
+    const explanations = {
+      "1943": "Maslow published A Theory of Human Motivation, outlining a model of human needs.",
+      "1954": "Maslow developed his motivational framework in Motivation and Personality.",
+      "1969": "Rogers published Freedom to Learn, emphasizing person-centered education.",
+      "1972": "Ginott's Teacher and Child explored respectful adult–child communication."
+    };
+
+    timeline.querySelectorAll(".timeline-point").forEach(point=>{
+      point.addEventListener("click",()=>{
+        document.getElementById("timelineExplanation").textContent =
+          explanations[point.dataset.year];
+      });
+    });
+  }
+
+  /* 2. COMMUNICATION TRANSFORMATION */
+  const ginottSlide = slides[3];
+
+  if(ginottSlide){
+    const comparison = document.createElement("div");
+    comparison.innerHTML = `
+      <div class="comparison-stage">
+        <div class="comparison-box">
+          <h4>INEFFECTIVE COMMUNICATION</h4>
+          <p>“You never listen.”</p>
+        </div>
+        <div class="comparison-box">
+          <h4>CONSTRUCTIVE COMMUNICATION</h4>
+          <p>“I need your attention so we can continue learning.”</p>
+        </div>
+      </div>
+    `;
+
+    ginottSlide.appendChild(comparison);
+  }
+
+  /* 3. PROFESSIONAL EXCELLENCE FRAMEWORK */
+  const excellenceSlide = slides[8];
+
+  if(excellenceSlide){
+    const framework = document.createElement("div");
+    framework.innerHTML = `
+      <div class="excellence-framework">
+        <div class="excellence-node" data-text="Clear, respectful professional interaction.">Communication</div>
+        <div class="excellence-node" data-text="Understanding learners' perspectives.">Empathy</div>
+        <div class="excellence-node" data-text="Evaluating teaching practice critically.">Reflection</div>
+        <div class="excellence-node" data-text="Developing effective pedagogical approaches.">Innovation</div>
+        <div class="excellence-node" data-text="Commitment to continuous professional learning.">Growth</div>
+      </div>
+      <div class="academic-reveal" id="excellenceExplanation">
+        Select a competency to explore its role.
+      </div>
+    `;
+
+    excellenceSlide.appendChild(framework);
+
+    framework.querySelectorAll(".excellence-node").forEach(node=>{
+      node.addEventListener("click",()=>{
+        document.getElementById("excellenceExplanation").textContent =
+          node.dataset.text;
+      });
+    });
+  }
+
+  /* 4. AUDIENCE REFLECTION */
+  const conclusionSlide = slides[11];
+
+  if(conclusionSlide){
+    const reflection = document.createElement("div");
+    reflection.innerHTML = `
+      <div class="academic-reveal">
+        <strong>REFLECTION QUESTION</strong>
+        <p>What makes a teacher truly effective?</p>
+        <div class="reflection-options">
+          <button data-answer="knowledge">Knowledge</button>
+          <button data-answer="empathy">Empathy</button>
+          <button data-answer="reflection">Reflection</button>
+        </div>
+        <p id="reflectionResult"></p>
+      </div>
+    `;
+
+    conclusionSlide.appendChild(reflection);
+
+    reflection.querySelectorAll("button").forEach(button=>{
+      button.addEventListener("click",()=>{
+        document.getElementById("reflectionResult").textContent =
+          "Professional excellence integrates knowledge, empathy and reflective practice.";
+      });
+    });
+  }
+
+  /* 5. PRESENTATION MENU */
+  const menu = document.createElement("div");
+  menu.className = "slide-menu";
+  menu.id = "academicSlideMenu";
+
+  const titles = [
+    "Introduction",
+    "Key Concepts",
+    "Communication Functions",
+    "Haim Ginott",
+    "Communication Styles",
+    "Psychological Competence",
+    "Carl Rogers",
+    "Conflict Case Study",
+    "Professional Excellence",
+    "Abraham Maslow",
+    "Professional Development",
+    "Conclusion"
+  ];
+
+  menu.innerHTML = `
+    <button id="closeAcademicMenu">CLOSE ×</button>
+    <h2>Presentation Overview</h2>
+    <div class="menu-grid">
+      ${titles.map((title,index)=>`
+        <button class="menu-item" data-slide="${index}">
+          ${String(index+1).padStart(2,"0")} — ${title}
+        </button>
+      `).join("")}
+    </div>
+  `;
+
+  document.body.appendChild(menu);
+
+  const nav = document.querySelector(".nav");
+
+  if(nav){
+    const menuButton = document.createElement("button");
+    menuButton.textContent = "SLIDE MENU";
+    menuButton.addEventListener("click",()=>{
+      menu.classList.add("open");
+    });
+    nav.appendChild(menuButton);
+  }
+
+  document.getElementById("closeAcademicMenu")
+    .addEventListener("click",()=>{
+      menu.classList.remove("open");
+    });
+
+  menu.querySelectorAll(".menu-item").forEach(button=>{
+    button.addEventListener("click",()=>{
+      showSlide(Number(button.dataset.slide));
+      menu.classList.remove("open");
+    });
+  });
+
+})();
+</script><style>
+/* SLIDE 7 — ACADEMIC LIBRARY */
+
+.slide:nth-of-type(7) {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(7,24,44,.95) 0%,
+      rgba(13,43,70,.88) 55%,
+      rgba(17,55,86,.70) 100%
+    ),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1800")
+    center/cover no-repeat;
+}
+
+/* SLIDE 11 — UNIVERSITY ARCHITECTURE */
+
+.slide:nth-of-type(11) {
+  background:
+    linear-gradient(
+      115deg,
+      rgba(8,28,50,.94) 0%,
+      rgba(18,60,100,.86) 55%,
+      rgba(20,67,105,.75) 100%
+    ),
+    url("https://images.unsplash.com/photo-1562774053-701939374585?w=1800")
+    center/cover no-repeat;
+}
+
+/* TEXT READABILITY */
+
+.slide:nth-of-type(7) .panel,
+.slide:nth-of-type(11) .panel {
+  background: rgba(7,24,44,.78);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217,189,130,.35);
+}
+
+/* SUBTLE CINEMATIC ENTRANCE */
+
+.slide:nth-of-type(7).active,
+.slide:nth-of-type(11).active {
+  animation: academicBackgroundReveal 1s ease both;
+}
+
+@keyframes academicBackgroundReveal {
+  from {
+    opacity: 0;
+    filter: brightness(.7);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+</style><style>
+/* =========================================
+   ACADEMIC CINEMATIC BACKGROUNDS
+   Slides 2, 4, 8 and 12
+========================================= */
+
+/* SLIDE 2 — UNIVERSITY LIBRARY */
+.slide:nth-of-type(2) {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(7,24,44,.95) 0%,
+      rgba(12,39,65,.87) 55%,
+      rgba(15,47,75,.76) 100%
+    ),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1800")
+    center / cover no-repeat;
+}
+
+/* SLIDE 4 — HAIM GINOTT */
+.slide:nth-of-type(4) {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(7,24,44,.95) 0%,
+      rgba(12,39,65,.86) 55%,
+      rgba(15,47,75,.76) 100%
+    ),
+    url("https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1800")
+    center / cover no-repeat;
+}
+
+/* SLIDE 8 — CLASSROOM CONFLICT */
+.slide:nth-of-type(8) {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(7,24,44,.94) 0%,
+      rgba(12,39,65,.84) 55%,
+      rgba(15,47,75,.72) 100%
+    ),
+    url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1800")
+    center / cover no-repeat;
+}
+
+/* SLIDE 12 — ACADEMIC CONCLUSION */
+.slide:nth-of-type(12) {
+  background:
+    linear-gradient(
+      110deg,
+      rgba(7,24,44,.94) 0%,
+      rgba(12,39,65,.84) 55%,
+      rgba(15,47,75,.70) 100%
+    ),
+    url("https://images.unsplash.com/photo-1562774053-701939374585?w=1800")
+    center / cover no-repeat;
+}
+
+/* READABILITY AND PREMIUM EFFECT */
+.slide:nth-of-type(2) .panel,
+.slide:nth-of-type(4) .panel,
+.slide:nth-of-type(8) .panel,
+.slide:nth-of-type(12) .panel {
+  background: rgba(7,24,44,.79);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217,189,130,.35);
+}
+
+/* CINEMATIC ENTRANCE */
+.slide:nth-of-type(2).active,
+.slide:nth-of-type(4).active,
+.slide:nth-of-type(8).active,
+.slide:nth-of-type(12).active {
+  animation: academicPhotoReveal 1s ease both;
+}
+
+@keyframes academicPhotoReveal {
+  from {
+    opacity: 0;
+    filter: brightness(.75);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+</style>
